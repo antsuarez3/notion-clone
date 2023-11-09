@@ -47,7 +47,7 @@ export const UserItem = () => {
           </p>
           <div className='flex items-center gap-x-2'>
             <div className='rounded-md bg-secondary p-1'>
-              <Avatar>
+              <Avatar className='h-8 w-8'>
                 <AvatarImage src={user?.imageUrl} />
               </Avatar>
             </div>
