@@ -6,20 +6,23 @@ import {
   LucideIcon,
   MoreHorizontal,
   Plus,
+  Trash,
 } from 'lucide-react'
 import { useMutation } from 'convex/react'
+import { useRouter } from 'next/navigation'
+import { toast } from 'sonner'
+import { useUser } from '@clerk/clerk-react'
 
 import { Id } from '@/convex/_generated/dataModel'
 import { cn } from '@/lib/utils'
 import { Skeleton } from '@/components/ui/skeleton'
 import { api } from '@/convex/_generated/api'
-import { useRouter } from 'next/navigation'
-import { toast } from 'sonner'
 import {
   DropdownMenu,
   DropdownMenuTrigger,
   DropdownMenuContent,
   DropdownMenuItem,
+  DropdownMenuSeparator,
 } from '@/components/ui/dropdown-menu'
 
 interface ItemProps {
@@ -47,6 +50,7 @@ export const Item = ({
   onExpand,
   expanded,
 }: ItemProps) => {
+  const { user } = useUser()
   const router = useRouter()
   const create = useMutation(api.documents.create)
 
@@ -119,6 +123,21 @@ export const Item = ({
                 <MoreHorizontal className='h-4 w-4 text-muted-foreground' />
               </div>
             </DropdownMenuTrigger>
+            <DropdownMenuContent
+              className='w-60'
+              align='start'
+              side='right'
+              forceMount
+            >
+              <DropdownMenuItem onClick={() => {}}>
+                <Trash className='h-4 w-4 mr-2' />
+                Delete
+              </DropdownMenuItem>
+              <DropdownMenuSeparator />
+              <div className='text-xs text-muted-foreground p-2'>
+                Last edited by: {user?.fullName}
+              </div>
+            </DropdownMenuContent>
           </DropdownMenu>
           <div
             role='button'
