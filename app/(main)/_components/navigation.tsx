@@ -37,6 +37,7 @@ export const Navigation = () => {
     } else {
       resetWidth()
     }
+    // eslint-disable-next-line
   }, [isMobile])
 
   useEffect(() => {
